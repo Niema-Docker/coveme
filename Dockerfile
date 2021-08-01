@@ -29,3 +29,6 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
     mv virulign /usr/local/bin/
+
+# clean up
+RUN rm -rf /tmp/*
