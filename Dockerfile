@@ -5,7 +5,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y default-jre dirmngr software-properties-common unzip wget && \
+    apt-get install -y cmake default-jre dirmngr g++ make protobuf-compiler rsync software-properties-common unzip wget && \
     ln -s $(which python3) /usr/local/bin/python
 
 # install R and relevant R packages
@@ -42,6 +42,14 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
     mv virulign /usr/local/bin/
+
+# install UShER v0.3.5
+RUN wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz" | tar -zx && \
+    cd usher-* && \
+    sed -i 's/sudo //g' installUbuntu.sh && \
+    ./installUbuntu.sh && \
+    cd .. && \
+    rm -rf usher-*
 
 # clean up
 RUN rm -rf /tmp/*
