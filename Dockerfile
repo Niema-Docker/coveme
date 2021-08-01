@@ -22,7 +22,8 @@ RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc"
     Rscript -e "devtools::install_github('wleepang/shiny-directory-input')"
 
 # install NextFlow
-RUN wget -qO- "https://get.nextflow.io" | bash
+RUN wget -qO- "https://get.nextflow.io" | bash && \
+    mv nextflow /usr/local/bin/
 
 # install IQ-TREE 2 v2.1.2
 RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree-2.1.2-Linux.tar.gz" | tar -zx && \
