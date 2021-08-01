@@ -12,6 +12,7 @@ RUN apt-get update && \
 RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc" >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
     add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y r-base && \
+    Rscript -e "install.packages('BiocManager')" && \
     Rscript -e "install.packages('devtools')" && \
     Rscript -e "install.packages('doRNG')" && \
     Rscript -e "install.packages('dplyr')" && \
@@ -19,7 +20,8 @@ RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc"
     Rscript -e "install.packages('gridExtra')" && \
     Rscript -e "install.packages('optparse')" && \
     Rscript -e "install.packages('shiny')" && \
-    Rscript -e "devtools::install_github('wleepang/shiny-directory-input')"
+    Rscript -e "devtools::install_github('wleepang/shiny-directory-input')" && \
+    Rscript -e "BiocManager::install('DECIPHER')"
 
 # install NextFlow
 RUN wget -qO- "https://get.nextflow.io" | bash && \
