@@ -32,6 +32,11 @@ RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree
     mv iqtree-*/bin/* /usr/local/bin/ && \
     rm -rf iqtree-*
 
+# install MEGA X v10.2.6-1
+RUN wget -q "https://www.megasoftware.net/releases/megax_10.2.6-1_amd64.deb" && \
+    dpkg -i megax*.deb && \
+    rm megax*.deb
+
 # install TARDiS (2021-07-19 commit)
 RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archive/c214f7b298f0b4b182ed7f87ab28da2aaeb4049f.zip" && \
     unzip "tardis.zip" && \
