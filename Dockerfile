@@ -5,7 +5,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y cmake default-jre dirmngr g++ make protobuf-compiler rsync software-properties-common unzip wget && \
+    apt-get install -y cmake default-jre dirmngr g++ libboost-all-dev make protobuf-compiler rsync software-properties-common unzip wget && \
     ln -s $(which python3) /usr/local/bin/python
 
 # install R and relevant R packages
