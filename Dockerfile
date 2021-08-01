@@ -48,6 +48,7 @@ RUN wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz"
     cd usher-* && \
     sed -i 's/sudo //g' installUbuntu.sh && \
     ./installUbuntu.sh && \
+    mv build/* /usr/local/bin/
     cd .. && \
     rm -rf usher-*
 
