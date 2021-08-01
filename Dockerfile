@@ -10,7 +10,7 @@ RUN apt-get update && \
 # install R
 RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc" >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
     add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
-    apt-get install -y r-base
+    DEBIAN_FRONTEND=noninteractive apt-get install -y r-base
 
 # install IQ-TREE 2 v2.1.2
 RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree-2.1.2-Linux.tar.gz" | tar -zx && \
