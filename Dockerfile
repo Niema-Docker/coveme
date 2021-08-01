@@ -5,7 +5,8 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y dirmngr software-properties-common unzip wget
+    apt-get install -y dirmngr software-properties-common unzip wget && \
+    ln -s $(which python3) /usr/local/bin/python
 
 # install R
 RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc" >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
