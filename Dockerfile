@@ -6,7 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
+    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
 
 # install R and relevant R packages
 RUN Rscript -e "install.packages('BiocManager')" && \
