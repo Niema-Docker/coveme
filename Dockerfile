@@ -5,6 +5,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
+    mkdir -p /usr/share/man/man1 && \
     apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler rsync software-properties-common unzip wget && \
     ln -s $(which python3) /usr/local/bin/python
 
