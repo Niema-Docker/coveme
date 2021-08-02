@@ -1,5 +1,5 @@
-# Minimal Docker image for COVEME using Ubuntu base
-FROM ubuntu:20.10
+# Minimal Docker image for COVEME using Debian minimal base
+FROM debian:10.10-slim
 MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 
 # prep environment
