@@ -32,11 +32,6 @@ RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree
     mv iqtree-*/bin/* /usr/local/bin/ && \
     rm -rf iqtree-*
 
-# install MAFFT v7.487-1 (for UShER)
-RUN wget -q "https://mafft.cbrc.jp/alignment/software/mafft_7.487-1_amd64.deb" && \
-    dpkg -i mafft*.deb && \
-    rm mafft*.deb
-
 # install MEGA X v10.2.6-1
 RUN wget -q "https://www.megasoftware.net/releases/megax_10.2.6-1_amd64.deb" && \
     dpkg -i megax*.deb && \
@@ -53,15 +48,6 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
     mv virulign /usr/local/bin/
-
-# install UShER v0.3.5
-RUN wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz" | tar -zx && \
-    cd usher-* && \
-    sed -i 's/sudo //g' installUbuntu.sh && \
-    ./installUbuntu.sh && \
-    mv build/* /usr/local/bin/
-    cd .. && \
-    rm -rf usher-*
 
 # clean up
 RUN rm -rf /tmp/*
