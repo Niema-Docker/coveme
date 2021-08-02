@@ -5,7 +5,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y cmake default-jre dirmngr g++ libboost-all-dev make protobuf-compiler rsync software-properties-common unzip wget && \
+    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler rsync software-properties-common unzip wget && \
     ln -s $(which python3) /usr/local/bin/python
 
 # install R and relevant R packages
@@ -32,9 +32,15 @@ RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree
     mv iqtree-*/bin/* /usr/local/bin/ && \
     rm -rf iqtree-*
 
+# install MAFFT v7.487-1 (for UShER)
+RUN wget -q "https://mafft.cbrc.jp/alignment/software/mafft_7.487-1_amd64.deb" && \
+    dpkg -i mafft*.deb && \
+    rm mafft*.deb
+
 # install MEGA X v10.2.6-1
 RUN wget -q "https://www.megasoftware.net/releases/megax_10.2.6-1_amd64.deb" && \
     dpkg -i megax*.deb && \
+    apt-get --fix-broken install -y && \
     rm megax*.deb
 
 # install TARDiS (2021-07-19 commit)
