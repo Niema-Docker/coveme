@@ -6,7 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler rsync software-properties-common unzip wget && \
+    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler rsync software-properties-common unzip wget
 
 # install R and relevant R packages
 RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc" >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
