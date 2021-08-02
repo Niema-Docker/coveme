@@ -9,10 +9,7 @@ RUN apt-get update && \
     apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
 
 # install R and relevant R packages
-RUN wget -qO- "https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc" >> /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
-    add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y r-base && \
-    Rscript -e "install.packages('devtools')" && \
+RUN Rscript -e "install.packages('devtools')" && \
     Rscript -e "install.packages('BiocManager')" && \
     Rscript -e "install.packages('doRNG')" && \
     Rscript -e "install.packages('dplyr')" && \
