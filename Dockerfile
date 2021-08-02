@@ -9,8 +9,8 @@ RUN apt-get update && \
     apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libprotoc-dev libtbb-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
 
 # install R and relevant R packages
-RUN Rscript -e "install.packages('devtools')" && \
-    Rscript -e "install.packages('BiocManager')" && \
+RUN Rscript -e "install.packages('BiocManager')" && \
+    Rscript -e "install.packages('devtools')" && \
     Rscript -e "install.packages('doRNG')" && \
     Rscript -e "install.packages('dplyr')" && \
     Rscript -e "install.packages('ggplot2')" && \
