@@ -2,11 +2,14 @@
 FROM debian:10.10-slim
 MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 
+ENV DEBIAN_FRONTEND=noninteractive
+USER root
+
 # prep environment
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
+    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget ca-certificates sudo
 
 # install R and relevant R packages
 RUN Rscript -e "install.packages('BiocManager')" && \
@@ -45,6 +48,17 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
     mv virulign /usr/local/bin/
+
+# Install UShER v0.3.5
+WORKDIR /HOME
+RUN wget -qO "usher-0.3.5.zip" "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.zip" && \
+        unzip usher-0.3.5.zip
+WORKDIR usher-0.3.5
+RUN ./installUbuntu.sh
+RUN mv build/usher /usr/local/bin
+RUN mv build/matUtils /usr/local/bin
+RUN mv build/matOptimize /usr/local/bin
+WORKDIR /HOME
 
 # clean up
 RUN rm -rf /tmp/*
