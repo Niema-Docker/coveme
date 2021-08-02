@@ -31,7 +31,7 @@ RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree
 
 # install MEGA X v10.2.6-1
 RUN wget -q "https://www.megasoftware.net/releases/megax_10.2.6-1_amd64.deb" && \
-    dpkg -i megax*.deb && \
+    (dpkg -i megax*.deb  || true) && \
     apt-get --fix-broken install -y && \
     rm megax*.deb
 
