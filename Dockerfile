@@ -6,7 +6,7 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential ca-certificates cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common sudo unzip wget
+    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
 
 # install R and relevant R packages
 RUN Rscript -e "install.packages('BiocManager')" && \
@@ -43,13 +43,13 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
     rm tardis.zip
 
 # install UShER v0.3.5
-RUN wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz" | tar -zx && \
+RUN cd /usr/local/bin && \
+    wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz" | tar -zx && \
     cd usher-* && \
     sed -i 's/sudo //g' installUbuntu.sh && \
     ./installUbuntu.sh && \
     mv build/usher build/matUtils build/matOptimize /usr/local/bin/ && \
-    cd .. && \
-    rm -rf usher-*
+    cd /
 
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
