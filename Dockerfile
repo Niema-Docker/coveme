@@ -6,9 +6,14 @@ MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler r-base r-base-dev rsync software-properties-common unzip wget
+    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libxml2-dev make protobuf-compiler python3 python3-pip r-base r-base-dev rsync software-properties-common unzip wget && \
+    ln -s $(which python3) /usr/local/bin/python && \
+    ln -s $(which pip3) /usr/local/bin/pip
 
-# install R and relevant R packages
+# install relevant Python packages
+RUN pip3 install biopython
+
+# install relevant R packages
 RUN Rscript -e "install.packages('BiocManager')" && \
     Rscript -e "install.packages('devtools')" && \
     Rscript -e "install.packages('doRNG')" && \
@@ -35,6 +40,11 @@ RUN wget -q "https://www.megasoftware.net/releases/megax_10.2.6-1_amd64.deb" && 
     apt-get --fix-broken install -y && \
     rm megax*.deb
 
+# install Minimap2 v2.21
+RUN wget -qO- "https://github.com/lh3/minimap2/releases/download/v2.21/minimap2-2.21_x64-linux.tar.bz2" | tar -jx && \
+    mv minimap2-*/minimap2* minimap2-*/k8 /usr/local/bin/ && \
+    rm -rf minimap2-*
+
 # install TARDiS (2021-07-19 commit)
 RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archive/c214f7b298f0b4b182ed7f87ab28da2aaeb4049f.zip" && \
     unzip "tardis.zip" && \
@@ -50,6 +60,10 @@ RUN cd /usr/local/bin && \
     ./installUbuntu.sh && \
     mv build/usher build/matUtils build/matOptimize /usr/local/bin/ && \
     cd /
+
+# install ViralMSA v1.1.16
+RUN wget -O /usr/local/bin/ViralMSA.py "https://github.com/niemasd/ViralMSA/raw/1.1.16/ViralMSA.py" && \
+    chmod a+x /usr/local/bin/ViralMSA.py
 
 # install VIRULIGN v1.0.1
 RUN wget -qO- "https://github.com/rega-cev/virulign/releases/download/v1.0.1/virulign-linux-64bit.tgz" | tar -zx && \
