@@ -29,6 +29,12 @@ RUN Rscript -e "install.packages('BiocManager')" && \
 RUN wget -qO- "https://get.nextflow.io" | bash && \
     mv nextflow /usr/local/bin/
 
+# install FigTree v1.4.4
+RUN wget -qO- "https://github.com/rambaut/figtree/releases/download/v1.4.4/FigTree_v1.4.4.tgz" | tar -zx && \
+    mv FigTree* /usr/local/bin/FigTree && \
+    echo -e '#!/usr/bin/env bash\nFULL_PATH=$(realpath $0)\ncd $(dirname $FULL_PATH)/FigTree\n./bin/figtree "$@"' > /usr/local/bin/figtree && \
+    chmod a+x /usr/local/bin/figtree /usr/local/bin/FigTree*/bin/*
+
 # install IQ-TREE 2 v2.1.2
 RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree-2.1.2-Linux.tar.gz" | tar -zx && \
     mv iqtree-*/bin/* /usr/local/bin/ && \
