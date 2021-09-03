@@ -32,7 +32,6 @@ RUN wget -qO- "https://get.nextflow.io" | bash && \
 # install BLAST v2.12.0+
 RUN wget -qO- "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-x64-linux.tar.gz" | tar -zx && \
     mv ncbi-blast-*/bin/* /usr/local/bin/ && \
-    ln -s /usr/local/bin/makeblastdb /usr/local/bin/makedb && \
     rm -rf ncbi-blast-*
 
 # install FigTree v1.4.4
