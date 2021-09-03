@@ -29,11 +29,23 @@ RUN Rscript -e "install.packages('BiocManager')" && \
 RUN wget -qO- "https://get.nextflow.io" | bash && \
     mv nextflow /usr/local/bin/
 
+# install BLAST v2.12.0+
+RUN wget -qO- "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-x64-linux.tar.gz" | tar -zx && \
+    mv ncbi-blast-*/bin/* /usr/local/bin/ && \
+    ln -s /usr/local/bin/makeblastdb /usr/local/bin/makedb && \
+    rm -rf ncbi-blast-*
+
 # install FigTree v1.4.4
 RUN wget -qO- "https://github.com/rambaut/figtree/releases/download/v1.4.4/FigTree_v1.4.4.tgz" | tar -zx && \
     mv FigTree* /usr/local/bin/FigTree && \
     echo -e '#!/usr/bin/env bash\nFULL_PATH=$(realpath $0)\ncd $(dirname $FULL_PATH)/FigTree\n./bin/figtree "$@"' > /usr/local/bin/figtree && \
     chmod a+x /usr/local/bin/figtree /usr/local/bin/FigTree*/bin/*
+
+# install flaco (2021-09-01, a5ffaadfe32be12afedb13d82ee778651aa4458b)
+RUN wget -qO flaco.zip "https://github.com/salemilab/flaco/archive/a5ffaadfe32be12afedb13d82ee778651aa4458b.zip" && \
+    unzip flaco.zip && \
+    mv flaco-*/bin/* /usr/local/bin/ && \
+    rm -rf flaco*
 
 # install IQ-TREE 2 v2.1.2
 RUN wget -qO- "https://github.com/iqtree/iqtree2/releases/download/v2.1.2/iqtree-2.1.2-Linux.tar.gz" | tar -zx && \
