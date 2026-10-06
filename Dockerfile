@@ -10,7 +10,7 @@ RUN apt-get update && \
     ln -s $(which pip3) /usr/local/bin/pip
 
 # install relevant Python packages
-RUN pip3 install biopython
+RUN pip3 install --break-system-packages biopython
 
 # install relevant R packages
 RUN Rscript -e "install.packages('BiocManager')" && \
