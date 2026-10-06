@@ -1,6 +1,5 @@
 # Minimal Docker image for COVEME using Debian minimal base
-FROM debian:10.10-slim
-MAINTAINER Niema Moshiri <niemamoshiri@gmail.com>
+FROM debian:latest-slim
 
 # prep environment
 RUN apt-get update && \
