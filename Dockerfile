@@ -29,8 +29,8 @@ RUN Rscript -e "install.packages('BiocManager', repos='https://cloud.r-project.o
 RUN wget -qO- "https://get.nextflow.io" | bash && \
     mv nextflow /usr/local/bin/
 
-# install BLAST v2.12.0+
-RUN wget -qO- "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-x64-linux.tar.gz" | tar -zx && \
+# install BLAST v2.17.0+
+RUN wget -qO- "https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.17.0+-x64-linux.tar.gz" | tar -zx && \
     mv ncbi-blast-*/bin/* /usr/local/bin/ && \
     rm -rf ncbi-blast-*
 
