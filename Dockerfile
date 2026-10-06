@@ -5,7 +5,7 @@ FROM debian:stable-slim
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
+    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ git libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
     ln -s $(which python3) /usr/local/bin/python && \
     ln -s $(which pip3) /usr/local/bin/pip
 
@@ -13,15 +13,15 @@ RUN apt-get update && \
 RUN pip3 install --break-system-packages biopython
 
 # install relevant R packages
-RUN Rscript -e "install.packages('BiocManager')" && \
-    Rscript -e "install.packages('devtools')" && \
-    Rscript -e "install.packages('doRNG')" && \
-    Rscript -e "install.packages('dplyr')" && \
-    Rscript -e "install.packages('ggplot2')" && \
-    Rscript -e "install.packages('gridExtra')" && \
-    Rscript -e "install.packages('optparse')" && \
-    Rscript -e "install.packages('shiny')" && \
-    Rscript -e "devtools::install_github('wleepang/shiny-directory-input')" && \
+RUN Rscript -e "install.packages('BiocManager', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('remotes', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('doRNG', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('dplyr', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('ggplot2', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('gridExtra', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('optparse', repos='https://cloud.r-project.org')" && \
+    Rscript -e "install.packages('shiny', repos='https://cloud.r-project.org')" && \
+    Rscript -e "remotes::install_github('wleepang/shiny-directory-input')" && \
     Rscript -e "BiocManager::install('DECIPHER')"
 
 # install NextFlow
