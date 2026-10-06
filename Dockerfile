@@ -14,14 +14,15 @@ RUN pip3 install --break-system-packages biopython
 
 # install relevant R packages
 RUN Rscript -e "install.packages('BiocManager', repos='https://cloud.r-project.org')" && \
-    Rscript -e "install.packages('remotes', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('doRNG', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('dplyr', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('ggplot2', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('gridExtra', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('optparse', repos='https://cloud.r-project.org')" && \
     Rscript -e "install.packages('shiny', repos='https://cloud.r-project.org')" && \
-    Rscript -e "remotes::install_github('wleepang/shiny-directory-input')" && \
+    wget -qO shiny-directory-input.tar.gz "https://github.com/wleepang/shiny-directory-input/archive/refs/heads/master.tar.gz" && \
+    R CMD INSTALL shiny-directory-input.tar.gz && \
+    rm shiny-directory-input.tar.gz && \
     Rscript -e "BiocManager::install('DECIPHER')"
 
 # install NextFlow
