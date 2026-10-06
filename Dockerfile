@@ -5,7 +5,7 @@ FROM debian:stable-slim
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ git libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev=2020.3* libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
+    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ git libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
     ln -s $(which python3) /usr/local/bin/python && \
     ln -s $(which pip3) /usr/local/bin/pip
 
@@ -69,9 +69,9 @@ RUN wget -qO "tardis.zip" "https://github.com/smarini/tardis-phylogenetics/archi
     ln -s /usr/local/bin/tardis_dir/tardis /usr/local/bin/tardis && \
     rm tardis.zip
 
-# install UShER v0.3.5
+# install UShER v0.6.6
 RUN cd /usr/local/bin && \
-    wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.3.5.tar.gz" | tar -zx && \
+    wget -qO- "https://github.com/yatisht/usher/archive/refs/tags/v0.6.6.tar.gz" | tar -zx && \
     cd usher-* && \
     sed -i 's/sudo //g' installUbuntu.sh && \
     ./installUbuntu.sh && \
