@@ -5,7 +5,7 @@ FROM debian:stable-slim
 RUN apt-get update && \
     apt-get -y upgrade && \
     mkdir -p /usr/share/man/man1 && \
-    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ git libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
+    apt-get install -y build-essential bzip2 cmake default-jre dirmngr g++ git libboost-all-dev libcurl4-openssl-dev libprotoc-dev libssl-dev libtbb-dev=2020.3* libuv1-dev libxml2-dev make pkg-config protobuf-compiler python3 python3-pip r-base r-base-dev rsync unzip wget && \
     ln -s $(which python3) /usr/local/bin/python && \
     ln -s $(which pip3) /usr/local/bin/pip
 
